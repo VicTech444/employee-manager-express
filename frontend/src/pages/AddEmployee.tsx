@@ -20,17 +20,23 @@ export default function AddEmployee() {
   if (data.error) {
     navigate("/");
   }
-
+  
   return (
     <div>
       <Navbar />
       <Header />
-      <NotifyContext.Provider key={notification?.type} value={{notification, setNotification}}>
-        {
-          notification && <Notification message={notification.message} type={notification.type}/>
-        }
+      <NotifyContext.Provider
+        key={notification?.type}
+        value={{ notification, setNotification }}
+      >
+        {notification && (
+          <Notification
+            message={notification.message}
+            type={notification.type}
+          />
+        )}
         <div className="container">
-        <EmployeeForm />
+          <EmployeeForm />
         </div>
       </NotifyContext.Provider>
     </div>

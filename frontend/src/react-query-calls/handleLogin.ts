@@ -37,5 +37,5 @@ export const useHandleLogin = () => {
         refetchOnMount: false,
     });
 
-    return { data }
+    return { data, cookie }
 };

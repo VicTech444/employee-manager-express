@@ -8,9 +8,9 @@ import { getAllEmployees } from "../react-query-calls/getAllEmployees";
 
 export default function ListEmployee() {
   let navigate = useNavigate();
-  let { data } = useHandleLogin();
+  let { data, cookie } = useHandleLogin();
 
-  if (data.error) {
+  if (data.error || !cookie) {
     navigate("/");
   }
 
