@@ -1,14 +1,16 @@
 interface formProps {
-  role_name: string
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  phone: string;
-  roleId: string;
+  phone_number: string;
+  role_id: number;
 }
 
-export default function EmployeeList({employees} : {employees: formProps[]}) {
-
+export default function EmployeeList({
+  employees,
+}: {
+  employees: formProps[];
+}) {
   return (
     <table>
       <thead>
@@ -21,15 +23,18 @@ export default function EmployeeList({employees} : {employees: formProps[]}) {
         </tr>
       </thead>
       <tbody>
-        {employees?.map((emp) => (
-          <tr key={emp.roleId}>
-            <td>{emp.firstName}</td>
-            <td>{emp.lastName}</td>
-            <td>{emp.email}</td>
-            <td>{emp.phone}</td>
-            <td>{emp.role_name}</td>
-          </tr>
-        ))}
+        {employees?.map((emp) => {
+          let roleName = emp.role_id === 1 ? 'Employee' : 'Manager';
+          return (
+            <tr key={emp.email}>
+              <td>{emp.first_name}</td>
+              <td>{emp.last_name}</td>
+              <td>{emp.email}</td>
+              <td>{emp.phone_number}</td>
+              <td>{roleName}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

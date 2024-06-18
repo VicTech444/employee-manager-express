@@ -1,10 +1,10 @@
-import { employeeModel } from "../model/employeeModel.js";
-import { validateEmployeeCredentials } from "../schema/employee.js";
+import { loginEmployeeModel } from "../model/loginEmployeeModel.js";
+import { validateEmployeeCredentials } from "../schema/logEmployee.js";
 import 'dotenv/config.js'
 
-export class employeeController {
+export class loginEmployeeController {
     static async getAllEmployees (req, res) {
-        let response = await employeeModel.getAllEmployees();
+        let response = await loginEmployeeModel.getAllEmployees();
 
         if (!response) {
             return res.status(500).json({
@@ -12,9 +12,7 @@ export class employeeController {
             });
         }
 
-        res.json({
-            message: response
-        })
+        res.json(response)
     }
 
     static async logEmployee (req, res) {
@@ -24,7 +22,7 @@ export class employeeController {
             return res.status(400).json({message: newData.error.message});
         }
         
-        let response = await employeeModel.logEmployee(newData.data);
+        let response = await loginEmployeeModel.logEmployee(newData.data);
         
         if (!response) {
             return res.status(400).json({message: "Invalid credentials"});

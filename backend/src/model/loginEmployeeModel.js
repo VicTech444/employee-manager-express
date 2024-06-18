@@ -3,10 +3,10 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config.js'
 import bcrypt from 'bcrypt'
 
-export class employeeModel {
+export class loginEmployeeModel {
     static async getAllEmployees () {
         try {
-        let {data, error} = await supabase.from('employee').select('*');
+        let {data, error} = await supabase.from('employees').select('first_name,last_name,email,phone_number,role_id');
 
         if (error) return false;
  
@@ -23,7 +23,8 @@ export class employeeModel {
             let token = jwt.sign({
                 exp: Math.floor(Date.now() / 1000 + 60 * 60 * 24),
                 email,
-                userName: 'FakeName'
+                userName: 'FakeName',
+                role: 1
             }, process.env.JWT_SECRET);
 
             return token;
@@ -34,7 +35,7 @@ export class employeeModel {
     
         let {data, error} = await supabase
         .from('employee')
-        .select('email,first_name')
+        .select('email,first_name, role')
         .eq('email', email)
         .eq('password', hashPassword);
 
@@ -43,8 +44,7 @@ export class employeeModel {
         let token = jwt.sign({
             exp: Math.floor(Date.now() / 1000 + 60 * 60 * 24),
             email: data[0].email,
-            username: data[0].first_name
-
+            username: data[0].first_name,
         }, process.env.JWT_SECRET);
 
         return token

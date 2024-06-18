@@ -1,15 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-
-interface formProps {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  password: string;
-  roleId: string;
-}
+import { useHandleAddEmploy } from "../react-query-calls";
 
 export default function EmployeeForm() {
+  let { handleAddEmploy } = useHandleAddEmploy();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -29,10 +22,9 @@ export default function EmployeeForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleAddEmployee(formData);
+    handleAddEmploy(formData);
   };
 
-  const handleAddEmployee = (formData: formProps) => {};
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="firstName">First Name:</label>

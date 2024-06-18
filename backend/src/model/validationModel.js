@@ -9,15 +9,15 @@ export class validationModel {
 
         try {
             let validation = jwt.verify(body, process.env.JWT_SECRET);
-            // let {email, userName} = validation;
+            let {email, userName} = validation;
 
-            // let valid = await supabase
-            // .from('employees')
-            // .select('email,first_name') 
-            // .eq('email', email)
-            // .eq('first_name', userName);
-
-            // if (valid.error) return false
+            let valid = await supabase
+            .from('employees')
+            .select('email,first_name') 
+            .eq('email', email)
+            .eq('first_name', userName);
+            
+            if (valid.error || valid.data.length === 0) return false
             
             return true
         } catch (error) {

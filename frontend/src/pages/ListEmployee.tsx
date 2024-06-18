@@ -1,14 +1,12 @@
 import Navbar from "../components/NavBar";
 import Header from "../components/Header";
 import EmployeeList from "../components/EmployeeList";
-import { useState } from "react";
 import { useHandleLogin } from "../react-query-calls/handleLogin";
 import { useNavigate } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import { getAllEmployees } from "../react-query-calls/getAllEmployees";
 
 export default function ListEmployee() {
-  const [employees, setEmployees] = useState([]);
   let navigate = useNavigate();
   let { data } = useHandleLogin();
 
@@ -16,6 +14,8 @@ export default function ListEmployee() {
     navigate("/");
   }
 
+  let {queryEmployees} = getAllEmployees();
+  
   return (
     <div>
       <Navbar />
@@ -27,7 +27,7 @@ export default function ListEmployee() {
         {data.isLoading ? (
           <FaSpinner className="h-6 w-6 animate-spin" />
         ) : (
-          <EmployeeList employees={employees} />
+          <EmployeeList employees={queryEmployees.data} />
         )}
       </div>
     </div>
