@@ -3,18 +3,6 @@ import { validateEmployeeCredentials } from "../schema/logEmployee.js";
 import 'dotenv/config.js'
 
 export class loginEmployeeController {
-    static async getAllEmployees (req, res) {
-        let response = await loginEmployeeModel.getAllEmployees();
-
-        if (!response) {
-            return res.status(500).json({
-                message: "An error has been occured"
-            });
-        }
-
-        res.json(response)
-    }
-
     static async logEmployee (req, res) {
         let newData = await validateEmployeeCredentials(req.body);
 

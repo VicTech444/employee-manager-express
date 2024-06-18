@@ -1,4 +1,12 @@
-export default function UserInformation() {
+interface props {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+}
+
+export default function UserInformation({first_name, last_name, email, phone_number}: props) {
+
   return (
     <form>
       <label htmlFor="firstName">First Name:</label>
@@ -6,7 +14,7 @@ export default function UserInformation() {
         type="text"
         id="firstName"
         name="firstName"
-        value={""}
+        value={first_name}
         required
         readOnly
         disabled
@@ -17,7 +25,7 @@ export default function UserInformation() {
         type="text"
         id="lastName"
         name="lastName"
-        value={""}
+        value={last_name}
         required
         readOnly
         disabled
@@ -28,18 +36,7 @@ export default function UserInformation() {
         type="email"
         id="email"
         name="email"
-        value={""}
-        required
-        readOnly
-        disabled
-      />
-
-      <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={"asd"}
+        value={email}
         required
         readOnly
         disabled
@@ -50,7 +47,7 @@ export default function UserInformation() {
         type="tel"
         id="phone"
         name="phone"
-        value={""}
+        value={phone_number}
         required
         readOnly
         disabled

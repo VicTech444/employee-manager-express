@@ -13,6 +13,7 @@ export const useHandlePermissions = () => {
             navigate("/");
             return
         }
+        
         let decoded: jwtResponse;
         try {
             decoded = jwtDecode(cookie);
@@ -33,5 +34,5 @@ export const useHandlePermissions = () => {
         }
     }, []);
 
-    return { data }
+    return { data, cookie }
 }

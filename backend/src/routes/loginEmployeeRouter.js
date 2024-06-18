@@ -3,5 +3,4 @@ import { loginEmployeeController } from '../controller/loginEmployeeController.j
 
 export const loginEmployeeRouter = e.Router();
 
-loginEmployeeRouter.get('/', loginEmployeeController.getAllEmployees);
-loginEmployeeRouter.post('/log', loginEmployeeController.logEmployee);
+loginEmployeeRouter.post('/', loginEmployeeController.logEmployee);
