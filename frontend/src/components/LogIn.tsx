@@ -52,7 +52,7 @@ export default function Login() {
         required
       />
 
-      <label htmlFor="password">Phone number:</label>
+      <label htmlFor="password">Password:</label>
       <input
         type="password"
         id="password"
