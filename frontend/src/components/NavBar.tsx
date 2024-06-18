@@ -3,14 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import NormalUserNav from "./NormalUserNav";
 import EmployeeNav from "./EmployeeNav";
 import ManagerNav from "./ManagerNav";
-
-interface jwtResponse {
-  email: string;
-  exp: number;
-  iat: number;
-  role: number;
-  userName: string;
-}
+import { jwtResponse } from "../interfaces/interfaces";
 
 export default function Navbar() {
   let cookie = useCookies();

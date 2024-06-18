@@ -2,53 +2,14 @@ import Navbar from "../components/NavBar";
 import Header from "../components/Header";
 import EmployeeForm from "../components/EmployeeForm";
 import Notification from "../components/Notification";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useHandleLogin } from "../react-query-calls";
+import { useState } from "react";
 import { NotifyContext } from "../context/NotificationContext";
-import { jwtDecode } from "jwt-decode";
+import { notifyProps } from "../interfaces/interfaces";
+import { useHandlePermissions } from "../hooks/usePermissions";
 
-interface notifyProps {
-  type: string;
-  message: string;
-}
-
-interface jwtResponse {
-  email: string;
-  exp: number;
-  iat: number;
-  role: number;
-  userName: string;
-}
 export default function AddEmployee() {
   const [notification, setNotification] = useState<notifyProps | null>(null);
-  let navigate = useNavigate();
-  let { data, cookie } = useHandleLogin();
-
-  if (data.error || !cookie) {
-    navigate("/");
-    return;
-  }
-  useEffect(() => {
-    let decoded: jwtResponse;
-    try {
-      decoded = jwtDecode(cookie);
-    } catch (error) {
-      console.error("Error decoding JWT:", error);
-      navigate("/");
-      return;
-    }
-
-    const { role } = decoded;
-
-    if (role === 1) {
-      navigate("/settings");
-      return;
-    } else if (role !== 2) {
-      navigate("/");
-      return;
-    }
-  }, []);
+  useHandlePermissions();
 
   return (
     <div>

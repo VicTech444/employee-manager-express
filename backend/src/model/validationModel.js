@@ -1,7 +1,6 @@
 import { supabase } from "../db/supabase.js";
 import jwt from 'jsonwebtoken';
 import 'dotenv/config.js'
-import bcrypt from 'bcrypt'
 
 export class validationModel {
     static async validateEmployee (body) {
@@ -9,6 +8,7 @@ export class validationModel {
 
         try {
             let validation = jwt.verify(body, process.env.JWT_SECRET);
+            console.log(validation)
             let {email, userName} = validation;
 
             let valid = await supabase
@@ -16,7 +16,7 @@ export class validationModel {
             .select('email,first_name') 
             .eq('email', email)
             .eq('first_name', userName);
-            
+            console.log(valid)
             if (valid.error || valid.data.length === 0) return false
             
             return true

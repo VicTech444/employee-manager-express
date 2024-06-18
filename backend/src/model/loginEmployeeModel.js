@@ -18,7 +18,7 @@ export class loginEmployeeModel {
 
     static async logEmployee (body) {
         let {email, password} = body;
-
+        
         if (email === 'FakeEmployee@gmail.com' && password === 'ImFake123@#') {
             let token = jwt.sign({
                 exp: Math.floor(Date.now() / 1000 + 60 * 60 * 24),
@@ -30,21 +30,21 @@ export class loginEmployeeModel {
             return token;
         }
 
-        let salts = await bcrypt.genSalt(10);
-        let hashPassword = await bcrypt.hash(password, salts);
-    
         let {data, error} = await supabase
-        .from('employee')
-        .select('email,first_name, role')
-        .eq('email', email)
-        .eq('password', hashPassword);
+        .from('employees')
+        .select('email,first_name, role_id, password')
+        .eq('email', email);
 
         if (error) return false;
+
+        let passValidate = await bcrypt.compare(password, data[0].password);
+        if (!passValidate) return false;
 
         let token = jwt.sign({
             exp: Math.floor(Date.now() / 1000 + 60 * 60 * 24),
             email: data[0].email,
-            username: data[0].first_name,
+            userName: data[0].first_name,
+            role: data[0].role_id
         }, process.env.JWT_SECRET);
 
         return token

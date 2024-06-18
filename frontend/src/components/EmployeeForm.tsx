@@ -57,7 +57,7 @@ export default function EmployeeForm() {
         required
       />
 
-      <label htmlFor="phone">Password:</label>
+      <label htmlFor="password">Password:</label>
       <input
         type="password"
         id="password"
