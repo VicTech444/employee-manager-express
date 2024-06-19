@@ -1,6 +1,4 @@
-import { supabase } from "../db/supabase.js";
 import { employeeModel } from "../model/employeeModel.js";
-import { validateEmployeeCredentials } from "../schema/logEmployee.js";
 import 'dotenv/config.js'
 
 export class employeeController {

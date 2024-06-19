@@ -28,7 +28,7 @@ export default function Login() {
   };
 
   const handleLogin = async (formData: formProps) => {
-    let res = await axios.post('http://localhost:3000/employee/log', formData, {
+    let res = await axios.post('http://localhost:3000/login', formData, {
       headers: {
         "Content-Type": "application/json"
       },
